@@ -18,14 +18,14 @@ jobs:
     - name: Connecting to your Ngrok account.
       run: .\ngrok\ngrok.exe authtoken 1vJZfqZlAR8JxCb2yvrKkj1sXKQ_2VhphSCKa9Zxj9VC1dG4u
       env:
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+        NGROK_AUTH_TOKEN: 1vJZfqZlAR8JxCb2yvrKkj1sXKQ_2VhphSCKa9Zxj9VC1dG4u
     - name: Activating RDP access.
       run: | 
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - name: Creating Tunnel.
-      run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389 EU"'
+      run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     - name: Connecting to your RDP.
       run: cmd /c start.bat
     - name: RDP is ready!
